@@ -60,28 +60,51 @@ class ViewController: UIViewController {
                     neg = false
                 }
             }
-            
             print("NEG")
         } else if sender.tag == 13 {
-            firstNumber = Int(result.text!)!
+            if firstNumber == 0 {
+                firstNumber = Int(result.text!)!
+            } else {
+                firstNumber = firstNumber + Int(result.text!)!
+                result.text = String(firstNumber)
+            }
             operation = sender.tag
             perfom = true
             neg = false
             print("+")
         } else if sender.tag == 14 {
-            firstNumber = Int(result.text!)!
+            if firstNumber == 0 {
+                firstNumber = Int(result.text!)!
+            } else {
+                firstNumber = firstNumber * Int(result.text!)!
+                result.text = String(firstNumber)
+            }
             operation = sender.tag
             perfom = true
             neg = false
             print("*")
         } else if sender.tag == 15 {
-            firstNumber = Int(result.text!)!
+            if firstNumber == 0 {
+                firstNumber = Int(result.text!)!
+            } else {
+                firstNumber = firstNumber - Int(result.text!)!
+                result.text = String(firstNumber)
+            }
             operation = sender.tag
             perfom = true
             neg = false
             print("-")
         } else if sender.tag == 16 {
-            firstNumber = Int(result.text!)!
+            if firstNumber == 0 {
+                firstNumber = Int(result.text!)!
+            } else {
+                if result.text == "0" {
+                    result.text = "Division by zero!"
+                } else {
+                    firstNumber = firstNumber / Int(result.text!)!
+                    result.text = String(firstNumber)
+                }
+            }
             operation = sender.tag
             perfom = true
             neg = false
