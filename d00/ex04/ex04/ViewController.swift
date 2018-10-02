@@ -11,11 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     var operation: Int = 0
-    var firstNumber: Int = 0
     var perfom: Bool = false
     var neg: Bool = false
     
     @IBOutlet weak var result: UILabel!
+    var firstNumber: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             perfom = false
             neg = false
         } else if sender.tag == 12 {
-            firstNumber = Int(result.text!)!
+            firstNumber = Double(result.text!)!
             if firstNumber > 0 {
                 if result.text != "0" {
                     result.text = "-" + result.text!
@@ -59,17 +59,17 @@ class ViewController: UIViewController {
                 }
             } else {
                 if result.text != "0" {
-                    result.text = String(-firstNumber)
+                    result.text = String(-firstNumber.rounded())
                     neg = false
                 }
             }
             print("NEG")
         } else if sender.tag == 13 {
             if firstNumber == 0 {
-                firstNumber = Int(result.text!)!
+                firstNumber = Double(result.text!)!
             } else {
-                firstNumber = firstNumber + Int(result.text!)!
-                result.text = String(firstNumber)
+                firstNumber = firstNumber + Double(result.text!)!
+                result.text = String(firstNumber.rounded())
             }
             operation = sender.tag
             perfom = true
@@ -77,10 +77,10 @@ class ViewController: UIViewController {
             print("+")
         } else if sender.tag == 14 {
             if firstNumber == 0 {
-                firstNumber = Int(result.text!)!
+                firstNumber = Double(result.text!)!
             } else {
-                firstNumber = firstNumber * Int(result.text!)!
-                result.text = String(firstNumber)
+                firstNumber = firstNumber * Double(result.text!)!
+                result.text = String(firstNumber.rounded())
             }
             operation = sender.tag
             perfom = true
@@ -88,10 +88,10 @@ class ViewController: UIViewController {
             print("*")
         } else if sender.tag == 15 {
             if firstNumber == 0 {
-                firstNumber = Int(result.text!)!
+                firstNumber = Double(result.text!)!
             } else {
-                firstNumber = firstNumber - Int(result.text!)!
-                result.text = String(firstNumber)
+                firstNumber = firstNumber - Double(result.text!)!
+                result.text = String(firstNumber.rounded())
             }
             operation = sender.tag
             perfom = true
@@ -99,13 +99,13 @@ class ViewController: UIViewController {
             print("-")
         } else if sender.tag == 16 {
             if firstNumber == 0 {
-                firstNumber = Int(result.text!)!
+                firstNumber = Double(result.text!)!
             } else {
                 if result.text == "0" {
                     result.text = "Division by zero!"
                 } else {
-                    firstNumber = firstNumber / Int(result.text!)!
-                    result.text = String(firstNumber)
+                    firstNumber = firstNumber / Double(result.text!)!
+                    result.text = String(firstNumber.rounded())
                 }
             }
             operation = sender.tag
@@ -114,21 +114,24 @@ class ViewController: UIViewController {
             print("/")
         } else if sender.tag == 17 {
             if operation == 13 {
-                result.text = String(firstNumber + Int(result.text!)!)
+                firstNumber += Double(result.text!)!
             } else if operation == 14 {
-                result.text = String(firstNumber * Int(result.text!)!)
+                firstNumber *= Double(result.text!)!
             } else if operation == 15 {
-                result.text = String(firstNumber - Int(result.text!)!)
+                firstNumber -= Double(result.text!)!
             } else if operation == 16 {
                 if result.text != "0" {
-                    result.text = String(firstNumber / Int(result.text!)!)
+                    firstNumber /= Double(result.text!)!
                 } else {
                     result.text = "Division by zero!"
                 }
             }
+            if result.text != "Division by zero!" {
+                result.text = String(firstNumber.rounded())
+            }
+            print("= \(firstNumber.rounded())")
             firstNumber = 0
             neg = false
-            print("=")
         }
     }
     
