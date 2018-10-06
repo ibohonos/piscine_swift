@@ -18,7 +18,7 @@ class APIController {
     }
     
     func queryRequest(dict: String){
-        let info = URL(string: "https://api.twitter.com/1.1/search/tweets.json?q=\(dict)&count=100&lang=en&result_type=recent".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
+        let info = URL(string: "https://api.twitter.com/1.1/search/tweets.json?q=\"\(dict)\"&count=100&lang=en&result_type=recent".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
         
         var url = URLRequest(url: info!)
         url.httpMethod = "GET"

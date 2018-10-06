@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A919AA5216775BB00F55F88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A919AA4216775BB00F55F88 /* AppDelegate.swift */; };
-		7A919AA7216775BB00F55F88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A919AA6216775BB00F55F88 /* ViewController.swift */; };
 		7A919AAA216775BB00F55F88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A919AA8216775BB00F55F88 /* Main.storyboard */; };
 		7A919AAC216775BB00F55F88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A919AAB216775BB00F55F88 /* Assets.xcassets */; };
 		7A919AAF216775BB00F55F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A919AAD216775BB00F55F88 /* LaunchScreen.storyboard */; };
@@ -22,7 +21,6 @@
 /* Begin PBXFileReference section */
 		7A919AA1216775BB00F55F88 /* d04.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = d04.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A919AA4216775BB00F55F88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7A919AA6216775BB00F55F88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7A919AA9216775BB00F55F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A919AAB216775BB00F55F88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A919AAE216775BB00F55F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				7A919AA4216775BB00F55F88 /* AppDelegate.swift */,
-				7A919AA6216775BB00F55F88 /* ViewController.swift */,
 				7A919AA8216775BB00F55F88 /* Main.storyboard */,
 				7A919AAB216775BB00F55F88 /* Assets.xcassets */,
 				7A919AAD216775BB00F55F88 /* LaunchScreen.storyboard */,
@@ -153,7 +150,6 @@
 			files = (
 				7AEB0F872167DC63008A66E6 /* TweetTableViewController.swift in Sources */,
 				7A919AB72167A48800F55F88 /* TweetData.swift in Sources */,
-				7A919AA7216775BB00F55F88 /* ViewController.swift in Sources */,
 				7A919AA5216775BB00F55F88 /* AppDelegate.swift in Sources */,
 				7A919AB92167A6C000F55F88 /* APITwitterDelegate.swift in Sources */,
 				7A919ABB2167A70400F55F88 /* APIController.swift in Sources */,

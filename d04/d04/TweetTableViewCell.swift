@@ -13,6 +13,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var mySearchBar: UISearchBar!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController, APITwitterDelegate {
+class TweetTableViewController: UITableViewController, UISearchBarDelegate, APITwitterDelegate {
 
     @IBOutlet weak var myTable: UITableView!
+    var newMySearchBar: UISearchBar!
+    var tokenGlobal: String = ""
     
     var allTweets : [tweetData] = []
     
@@ -40,7 +42,8 @@ class TweetTableViewController: UITableViewController, APITwitterDelegate {
             } else if let d = data {
                 do {
                     let dic: Dictionary = try JSONSerialization.jsonObject(with: d, options: []) as! [String:Any]
-                    let req = APIController(na: self, t: (dic["access_token"] as? String)!)
+                    self.tokenGlobal = (dic["access_token"] as? String)!
+                    let req = APIController(na: self, t: self.tokenGlobal)
                     req.queryRequest(dict: "school 42")
                 }
                 catch (let err) {
@@ -60,38 +63,39 @@ class TweetTableViewController: UITableViewController, APITwitterDelegate {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if allTweets.count == 0 {
-            return 0
-        } else {
-            return 1
-        }
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return allTweets.count
+        return allTweets.count + 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetTableViewCell
-
-        // Configure the cell...
-        cell.nameLabel?.text = allTweets[indexPath.row].name
-        cell.dateLabel?.text = allTweets[indexPath.row].date
-        cell.descLabel?.text = allTweets[indexPath.row].text
-        //cell.testLabel?.text = allTweets[indexPath.row].description
-        cell.backgroundColor = UIColor.white
-        cell.layer.borderWidth = 2.5
-        
-        myTable.rowHeight = UITableViewAutomaticDimension
-        myTable.estimatedRowHeight = 150
-        myTable.separatorColor = UIColor.black
-        myTable.contentInset = UIEdgeInsets.zero
-
-//        myTable.rowHeight = UITableViewAutomaticDimension
-//        myTable.estimatedRowHeight = 150.0
-        
-        return cell
+        if indexPath.row == 0 {
+            let searchCell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! TweetTableViewCell
+            searchCell.mySearchBar.placeholder = "Search"
+            self.newMySearchBar = searchCell.mySearchBar
+            self.newMySearchBar.delegate = self
+            
+            return searchCell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetTableViewCell
+            
+            // Configure the cell...
+            cell.nameLabel?.text = allTweets[indexPath.row - 1].name
+            cell.dateLabel?.text = allTweets[indexPath.row - 1].date
+            cell.descLabel?.text = allTweets[indexPath.row - 1].text
+            cell.backgroundColor = UIColor.white
+            cell.layer.borderWidth = 2.5
+            
+            myTable.rowHeight = UITableViewAutomaticDimension
+            myTable.estimatedRowHeight = 150
+            myTable.separatorColor = UIColor.black
+            myTable.contentInset = UIEdgeInsets.zero
+            
+            return cell
+        }
     }
     
     func threatTheTweets(name: [tweetData]) {
@@ -103,6 +107,15 @@ class TweetTableViewController: UITableViewController, APITwitterDelegate {
     
     func error(er: NSError) {
         print(er)
+    }
+    
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let a = APIController(na: self, t: self.tokenGlobal)
+        if (searchBar.text?.count)! > 0 {
+            a.queryRequest(dict: searchBar.text!)
+        } else {
+            a.queryRequest(dict: "school 42")
+        }
     }
 
     /*
