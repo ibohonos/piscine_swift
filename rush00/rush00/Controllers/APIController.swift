@@ -7,20 +7,27 @@
 //
 
 import Foundation
+import UIKit
 
 class APIController {
     let key : String = "2841c23aee32782b087795faf54566bea4eb0388a49e14562ba1976ef98d2bdb"
     let secret : String = "8d38487dc4196ff85713e7eeb1f45c95b8733f4dd735d9795a3a2ed5b3478311"
     
-    var token : String!
-    var id_user : String!
+    var token : String = ""
+    var id_user : String = ""
     var code: String!
     
-    init (code: String) {
-        self.code = code
+    init (code: String = "") {
+        if code != "" {
+            self.code = code
+        }
     }
     
-    func APITokenRequest() {
+    func getToken() -> String {
+        return self.token
+    }
+    
+    func APITokenRequest(window: UIWindow) {
         let BEARER = ((self.key + ":" + self.secret).data(using: String.Encoding.utf8))!.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
         
         let url = "https://api.intra.42.fr/oauth/token"
@@ -40,6 +47,11 @@ class APIController {
                     if let dic: Dictionary = try JSONSerialization.jsonObject(with: d, options: []) as? [String:Any] {
                         self.token = (dic["access_token"] as? String)!
                         self.APIUserRequest()
+                        DispatchQueue.main.async {
+                            let ms: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let page: StartNavigationController = ms.instantiateViewController(withIdentifier: "isLogginned") as! StartNavigationController
+                            window.rootViewController = page
+                        }
                     }
                 }
                 catch (let err) {

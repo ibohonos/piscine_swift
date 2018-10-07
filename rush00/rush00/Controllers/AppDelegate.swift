@@ -12,6 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+
+    var code: String = ""
+    var apic: APIController?
+//    var token: String = ""
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
@@ -21,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for queryItem in (components?.queryItems!)! {
                 if queryItem.name == "code" {
                     if let code = queryItem.value {
-                        let apic = APIController(code: code)
-                        apic.APITokenRequest()
+                        self.code = code
+                        apic = APIController(code: code)
+                        apic!.APITokenRequest(window: self.window!)
                     }
                 }
             }
