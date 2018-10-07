@@ -46,12 +46,7 @@ class APIController {
                 do {
                     if let dic: Dictionary = try JSONSerialization.jsonObject(with: d, options: []) as? [String:Any] {
                         self.token = (dic["access_token"] as? String)!
-                        self.APIUserRequest()
-                        DispatchQueue.main.async {
-                            let ms: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                            let page: StartNavigationController = ms.instantiateViewController(withIdentifier: "isLogginned") as! StartNavigationController
-                            window.rootViewController = page
-                        }
+                        self.APIUserRequest(window: window)
                     }
                 }
                 catch (let err) {
@@ -62,7 +57,7 @@ class APIController {
         task.resume()
     }
     
-    func APIUserRequest()
+    func APIUserRequest(window: UIWindow)
     {
         let url = "https://api.intra.42.fr/v2/me?access_token=" + self.token
         var request = URLRequest(url: (URL(string : url)!))
@@ -76,6 +71,11 @@ class APIController {
                 do {
                     if let dic: Dictionary = try JSONSerialization.jsonObject(with: d, options: []) as? [String:Any] {
                         self.id_user = String(describing: dic["id"]!)
+                        DispatchQueue.main.async {
+                            let ms: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                            let page: StartNavigationController = ms.instantiateViewController(withIdentifier: "isLogginned") as! StartNavigationController
+                            window.rootViewController = page
+                        }
                     }
                 }
                 catch (let err) {

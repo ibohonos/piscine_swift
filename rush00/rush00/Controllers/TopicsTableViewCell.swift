@@ -10,6 +10,8 @@ import UIKit
 
 class TopicsTableViewCell: UITableViewCell {
     
+    var topic: Topics?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descTextLabel: UILabel!

@@ -30,25 +30,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func loginIntra(_ sender: UIButton) {
-        let authURL = URL(string: "https://api.intra.42.fr/oauth/authorize?client_id=\(self.clientId)&redirect_uri=\(self.callbackUrl)&response_type=code")
+        let authURL = URL(string: "https://api.intra.42.fr/oauth/authorize?client_id=\(self.clientId)&redirect_uri=\(self.callbackUrl)&response_type=code&scope=public%20forum")
         UIApplication.shared.open(authURL!, options: [:], completionHandler: nil)
-    }
-    
-    override func performSegue(withIdentifier identifier: String, sender: Any?) {
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let seq = segue.destination as! TopicsTableViewController
-        print(seq)
-//        let cell = sender! as! TopicsTableViewCell
-//        if cell.imageLabel.image != nil {
-//            seq.image = cell.imageLabel.image!
-//        } else {
-//            let alertController = UIAlertController(title: "Error", message: "Cannot acces to this image", preferredStyle: UIAlertControllerStyle.alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//            self.present(alertController, animated: true, completion: nil)
-//        }
     }
     
 }

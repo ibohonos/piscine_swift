@@ -1,5 +1,5 @@
 //
-//  TopicsTableViewController.swift
+//  TopicTableViewController.swift
 //  rush00
 //
 //  Created by Ivan BOHONOSIUK on 07.10.2018.
@@ -8,34 +8,25 @@
 
 import UIKit
 
-class TopicsTableViewController: UITableViewController {
+class TopicTableViewController: UITableViewController{
 
+    var topic: Topics!
+    var id_user: String!
     var token: String!
-    var user_id: String!
-    var topics: [Topics] = []
-    var apic: APIController?
+    var id_topic: String!
+    var id_mess: String!
+    var title_mess: String!
+    var messages: [Messages] = []
+    var rep_tab: [Messages]!
     
-    @IBOutlet var topicsT: UITableView!
+    @IBOutlet var messTable: UITableView!
+    @IBOutlet var myTopicTable: UITableView!
     
-    @IBAction func logoutBtn(_ sender: Any) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let innerPage: ViewController = mainStoryboard.instantiateViewController(withIdentifier: "loginPage") as! ViewController
-        appDelegate.apic?.token = ""
-        appDelegate.apic?.id_user = ""
-        appDelegate.window?.rootViewController = innerPage
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDeleg = UIApplication.shared.delegate as! AppDelegate
-        apic = appDeleg.apic
-        self.token = apic?.token
-        self.user_id = apic?.id_user
-        APITopicsRequest(token: self.token)
-        
-//        topicsT.rowHeight = UITableViewAutomaticDimension
-//        topicsT.estimatedRowHeight = 140
-        
+        self.APIMessagesRequest(token: self.token, id: String(self.topic.id))
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -52,34 +43,55 @@ class TopicsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if self.topics.count > 0 {
-            return 1
-        }
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.topics.count
+        return self.messages.count + 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell", for: indexPath) as! TopicsTableViewCell
-
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "topicInnerCell", for: indexPath) as! TopicTableViewCell
+            
+            cell.loginLabel.text = topic.name
+            cell.dateLabel.text = topic.date
+            cell.descLabel.text = topic.text
+            cell.token = self.token
+            cell.id_topic = topic.id
+            
+            if String(topic.user_id) != self.id_user {
+                cell.editBtn.isHidden = true
+                cell.deleteBtn.isHidden = true
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "messagesCell", for: indexPath) as! TopicTableViewCell
+            
+            cell.messLoginLabel.text = messages[indexPath.row - 1].name
+            cell.messDateLabel.text = messages[indexPath.row - 1].date
+            cell.messDescLabel.text = messages[indexPath.row - 1].text
+            cell.id_mess = messages[indexPath.row - 1].id
+            
+            if messages[indexPath.row - 1].user_id != self.id_user {
+                cell.messDellBtn.isHidden = true
+                cell.messEditBtn.isHidden = true
+            }
+            
+            return cell
+        }
         // Configure the cell...
-        cell.nameLabel.text = self.topics[indexPath.row].name
-        cell.dateLabel.text = self.topics[indexPath.row].date
-        cell.descTextLabel.text = self.topics[indexPath.row].text
-        cell.topic = self.topics[indexPath.row]
 
-        return cell
+        
     }
     
     
-    func APITopicsRequest(token: String) {
+    func APIMessagesRequest(token: String, id: String) {
         
-        let url = "https://api.intra.42.fr/v2/topics?page=1&per_page=100&access_token=" + token
+        let url = "https://api.intra.42.fr/v2/topics/" + id + "/messages?page=1&per_page=100&access_token=" + token
         let request = NSMutableURLRequest(url: (URL(string : url) as! URL))
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
@@ -90,23 +102,42 @@ class TopicsTableViewController: UITableViewController {
             else if let d = data {
                 do {
                     if let json = try? JSONSerialization.jsonObject(with: d, options: []) as! [NSDictionary] {
-                        for topic in json {
-                            let id: Int! = topic["id"] as! Int
-                            let topics_name: String! = topic["name"] as! String
-                            let user = topic["author"]! as! NSDictionary
+                        //print(json)
+                        for mess in json {
+                            let id: Int! = mess["id"] as! Int
+                            let user = mess["author"]! as! NSDictionary
                             let name: String! = user["login"] as! String
                             let user_id: String! = String(describing: user["id"]!)
-                            let date: String! =  topic["created_at"] as! String
+                            let date: String! =  mess["created_at"] as! String
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                             let date2 = dateFormatter.date(from: date!)
-                            dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
+                            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
                             let newDate = dateFormatter.string(from: date2!)
-                            self.topics.append(Topics(id: id, name: name, user_id: user_id, date: newDate, text: topics_name, content: ""))
+                            let text = mess["content"] as! String
+                            let replies_tab = mess["replies"] as! NSArray
+                            var rep: [Messages] = []
+                            for reply in replies_tab {
+                                if let repl = reply as? NSDictionary {
+                                    let id_rep: Int! = repl["id"] as! Int
+                                    let user_rep = repl["author"]! as! NSDictionary
+                                    let name_rep: String! = user_rep["login"] as! String
+                                    let date_rep: String! =  repl["created_at"] as! String
+                                    let dateFormatter_rep = DateFormatter()
+                                    dateFormatter_rep.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                    let date2_rep = dateFormatter_rep.date(from: date_rep!)
+                                    dateFormatter_rep.dateFormat = "dd.MM.yyyy HH:mm"
+                                    let newDate_rep = dateFormatter_rep.string(from: date2_rep!)
+                                    let text_rep = repl["content"] as! String
+                                    rep.append(Messages(id: id_rep, name: name_rep, user_id: user_id, date: newDate_rep, text: text_rep, topic_id: self.id_topic, replies: []))
+                                }
+                            }
+                            self.messages.append(Messages(id: id, name: name, user_id: user_id, date: newDate, text: text, topic_id: self.id_topic, replies: rep))
                         }
+                        
                         DispatchQueue.main.async {
-                            self.user_id = self.apic?.id_user
-                            self.topicsT.reloadData()
+                            print(self.messages)
+                            self.messTable.reloadData()
                         }
                     }
                 }
@@ -118,14 +149,7 @@ class TopicsTableViewController: UITableViewController {
         task.resume()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let seq = segue.destination as! TopicTableViewController
-        let cell = sender! as! TopicsTableViewCell
-        print(cell)
-        seq.topic = cell.topic
-        seq.id_user = self.user_id
-        seq.token = self.token
-    }
+    
 
     /*
     // Override to support conditional editing of the table view.

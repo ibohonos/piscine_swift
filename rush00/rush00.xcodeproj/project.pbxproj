@@ -18,6 +18,9 @@
 		7AFB68C6216A2D4600C960E6 /* StartNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68C5216A2D4600C960E6 /* StartNavigationController.swift */; };
 		7AFB68CB216A429B00C960E6 /* Topics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68CA216A429B00C960E6 /* Topics.swift */; };
 		7AFB68CD216A42D700C960E6 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68CC216A42D700C960E6 /* Global.swift */; };
+		7AFB68CF216A5C0100C960E6 /* TopicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68CE216A5C0100C960E6 /* TopicTableViewController.swift */; };
+		7AFB68D1216A5CBA00C960E6 /* TopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68D0216A5CBA00C960E6 /* TopicTableViewCell.swift */; };
+		7AFB68D4216A7C9300C960E6 /* Messeges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB68D3216A7C9300C960E6 /* Messeges.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		7AFB68C5216A2D4600C960E6 /* StartNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNavigationController.swift; sourceTree = "<group>"; };
 		7AFB68CA216A429B00C960E6 /* Topics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topics.swift; sourceTree = "<group>"; };
 		7AFB68CC216A42D700C960E6 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		7AFB68CE216A5C0100C960E6 /* TopicTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewController.swift; sourceTree = "<group>"; };
+		7AFB68D0216A5CBA00C960E6 /* TopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTableViewCell.swift; sourceTree = "<group>"; };
+		7AFB68D3216A7C9300C960E6 /* Messeges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messeges.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			children = (
 				7AFB68CA216A429B00C960E6 /* Topics.swift */,
 				7AFB68CC216A42D700C960E6 /* Global.swift */,
+				7AFB68D3216A7C9300C960E6 /* Messeges.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -88,11 +95,13 @@
 			isa = PBXGroup;
 			children = (
 				7AB8D8DA2168E75400B9E0FF /* AppDelegate.swift */,
-				7AB8D8DC2168E75400B9E0FF /* ViewController.swift */,
 				7AB8D8EC216943D900B9E0FF /* APIController.swift */,
+				7AB8D8DC2168E75400B9E0FF /* ViewController.swift */,
+				7AFB68C5216A2D4600C960E6 /* StartNavigationController.swift */,
 				7AFB68BB2169FE3E00C960E6 /* TopicsTableViewController.swift */,
 				7AFB68BD2169FE7100C960E6 /* TopicsTableViewCell.swift */,
-				7AFB68C5216A2D4600C960E6 /* StartNavigationController.swift */,
+				7AFB68CE216A5C0100C960E6 /* TopicTableViewController.swift */,
+				7AFB68D0216A5CBA00C960E6 /* TopicTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -179,9 +188,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFB68CD216A42D700C960E6 /* Global.swift in Sources */,
+				7AFB68CF216A5C0100C960E6 /* TopicTableViewController.swift in Sources */,
+				7AFB68D4216A7C9300C960E6 /* Messeges.swift in Sources */,
 				7AFB68CB216A429B00C960E6 /* Topics.swift in Sources */,
 				7AFB68C6216A2D4600C960E6 /* StartNavigationController.swift in Sources */,
 				7AB8D8DD2168E75400B9E0FF /* ViewController.swift in Sources */,
+				7AFB68D1216A5CBA00C960E6 /* TopicTableViewCell.swift in Sources */,
 				7AB8D8DB2168E75400B9E0FF /* AppDelegate.swift in Sources */,
 				7AB8D8ED216943D900B9E0FF /* APIController.swift in Sources */,
 				7AFB68BC2169FE3E00C960E6 /* TopicsTableViewController.swift in Sources */,
