@@ -1,0 +1,25 @@
+{
+  "name": "ibohonos2018",
+  "version": "0.1.0",
+  "summary": "Now that your pod is created you have to take care about its podspec file.",
+  "swift_version": "4.0.3",
+  "description": "Now that your pod is created you have to take care about its podspec file. Now that your pod is created you have to take care about its podspec file. Now that your pod is created you have to take care about its podspec file",
+  "homepage": "https://github.com/ibohonos/ibohonos2018",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "ibohonos": "ibohonos@student.unit.ua"
+  },
+  "source": {
+    "git": "https://github.com/ibohonos/ibohonos2018.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ibohonos2018/Classes/**/*",
+  "resources": "ibohonos2018/Assets/*",
+  "frameworks": "CoreData"
+}

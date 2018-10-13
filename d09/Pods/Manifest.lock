@@ -1,0 +1,16 @@
+PODS:
+  - ibohonos2018 (0.1.0)
+
+DEPENDENCIES:
+  - ibohonos2018 (from `~/Documents/mygit/piscine_swift/d08/ibohonos2018/`)
+
+EXTERNAL SOURCES:
+  ibohonos2018:
+    :path: "~/Documents/mygit/piscine_swift/d08/ibohonos2018/"
+
+SPEC CHECKSUMS:
+  ibohonos2018: 3f6a3d456059ecc17c87a17e90819cc839d5d974
+
+PODFILE CHECKSUM: 3b08784625fea4239acfcbcd0f8a9193e415e20e
+
+COCOAPODS: 1.5.3
