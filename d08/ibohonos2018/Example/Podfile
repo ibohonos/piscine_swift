@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ibohonos2018_Example' do
+  pod 'ibohonos2018', :path => '../'
+
+  target 'ibohonos2018_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

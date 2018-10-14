@@ -1,0 +1,6 @@
+framework module ibohonos2018 {
+  umbrella header "ibohonos2018-umbrella.h"
+
+  export *
+  module * { export * }
+}

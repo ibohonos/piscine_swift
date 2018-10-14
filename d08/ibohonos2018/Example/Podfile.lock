@@ -1,0 +1,16 @@
+PODS:
+  - ibohonos2018 (0.1.0)
+
+DEPENDENCIES:
+  - ibohonos2018 (from `../`)
+
+EXTERNAL SOURCES:
+  ibohonos2018:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ibohonos2018: e97c927aa3811b2f64931fdb0552756f8a856998
+
+PODFILE CHECKSUM: 3343468bc89d54ff330bdd97b82a3e4aa6b6e83f
+
+COCOAPODS: 1.5.3

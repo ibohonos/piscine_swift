@@ -1,0 +1,22 @@
+{
+  "name": "ibohonos2018",
+  "version": "0.1.0",
+  "summary": "A short description of ibohonos2018.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/ibohonos/ibohonos2018",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "ibohonos": "ibohonos@student.unit.ua"
+  },
+  "source": {
+    "git": "https://github.com/ibohonos/ibohonos2018.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ibohonos2018/Classes/**/*"
+}
